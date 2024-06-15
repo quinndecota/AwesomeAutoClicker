@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AwesomeAutoClicker.Views"
         mc:Ignorable="d"
-        Title="AboutWindow" Height="450" Width="800">
-    <Grid>
-        <TextBlock>Hello</TextBlock>
-    </Grid>
+        Title="AboutWindow" Height="150" Width="200"
+                     MaxHeight="150" MaxWidth="200"
+             MinHeight="150" MinWidth="200">
+    <Border Background="#272535" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock FontSize="20" Foreground="White" Margin="0 40 0 0" TextAlignment="Center">By: Quinn</TextBlock>
+                <TextBlock FontSize="10" Foreground="White" Margin="0 20 0 0">www.mywebsite.com</TextBlock>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
