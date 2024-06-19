@@ -10,11 +10,5 @@ namespace AwesomeAutoClicker.ViewModels
 {
     public  class AdvancedVM : ViewModelBase
     {
-
-        public AdvancedVM()
-        {
-        }
-
-
     }
 }

@@ -23,6 +23,9 @@ namespace AwesomeAutoClicker.Views
         public HomeView()
         {
             InitializeComponent();
+
+            
         }
+
     }
 }
