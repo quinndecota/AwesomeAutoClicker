@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
-            <StackPanel Height="425" Grid.Row="1" Margin="0 100 0 0">
+            <StackPanel  Grid.Row="1" Margin="0 100 0 0">
                 <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Record" Margin="5" Padding="10">
                     <Button.Resources>
                         <Style TargetType="Border">
@@ -56,19 +56,24 @@
                 <Button Name="Del" Content="Delete Item" Grid.Column="2" Margin="10" Click="Del_Click"/>
                 <Button Name="Clr" Content="Clear All" Grid.Column="3" Margin="10" Click="Clr_Click"/>
 
-                <StackPanel Grid.Row="1"  Grid.ColumnSpan="3" Orientation="Horizontal" Name="BoxPanel">
-                    <StackPanel Orientation="Vertical" Width="150" Name="ClickTypeOption" Visibility="Collapsed">
+                <StackPanel Grid.Row="1"  Grid.ColumnSpan="4" Orientation="Horizontal" Name="BoxPanel">
+                    <StackPanel.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <StackPanel Orientation="Vertical" Width="100" Name="ClickTypeOption" Visibility="Collapsed" Margin="0 0 30 0">
                         <Label Content="Click Type" />
-                        <ComboBox Name="ClickType">
+                        <ComboBox Name="ClickType" >
                             <ComboBoxItem Content="Left" />
                             <ComboBoxItem Content="Right" />
                         </ComboBox>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" Width="150" Name="XPosOption" Visibility="Collapsed">
+                    <StackPanel Orientation="Vertical" Width="100" Name="XPosOption" Visibility="Collapsed" Margin="0 0 30 0">
                         <Label Content="X Position" />
                         <TextBox Name="XPos" />
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" Width="150" Name="YPosOption" Visibility="Collapsed">
+                    <StackPanel Orientation="Vertical" Width="100" Name="YPosOption" Visibility="Collapsed">
                         <Label Content="Y Position" />
                         <TextBox Name="YPos" />
                     </StackPanel>
@@ -86,23 +91,47 @@
                     </StackPanel>
                 </StackPanel>
 
-                <ListView  Name="actions"  Margin=" 60 30 60 30" Grid.Row="2" Grid.ColumnSpan="4"  >
+                <ListView  Name="actions"  Margin=" 10 10 10 30" Grid.Row="2" Grid.ColumnSpan="3"  >
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock FontSize="20" Text="{Binding}"/>
+                                <TextBlock FontSize="13" Text="{Binding}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
 
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Setter Property="Width" Value="146" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
+
+                <StackPanel Grid.Row="2" Grid.Column="3" Margin="0 0 0 0" VerticalAlignment="Center">
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Import" Margin="5" Padding="10">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Export" Margin="5" Padding="10">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Run" Margin="5" Padding="10">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+
             </Grid>
         </Grid>
     </Border>

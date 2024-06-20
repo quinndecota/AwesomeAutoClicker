@@ -23,12 +23,11 @@ namespace AwesomeAutoClicker.Views
     public partial class AdvancedView : UserControl
     {
         List<Models.Action> script = new List<Models.Action>();
-        List<string> gridViewActions = new List<string>(); 
+        ObservableCollection<string> gridViewActions = new ObservableCollection<string>(); 
         public AdvancedView()
         {
             InitializeComponent();
             actions.ItemsSource = gridViewActions;
-
         }
 
 
@@ -40,7 +39,7 @@ namespace AwesomeAutoClicker.Views
                 if (XPos.Text == null ||  XPos.Text.Length == 0 || YPos.Text == null || YPos.Text.Length == 0 || ClickType.Text == null || ClickType.Text.Length == 0)
                 { return; }
                 Models.Action currentAction = new Models.Action(TypeComboBox.Text, ClickType.Text, int.Parse(XPos.Text), int.Parse(YPos.Text), null, null, null);
-                gridViewActions.Add(currentAction.ClickType+" at (" + currentAction.Xpos +","+currentAction.Ypos+")");
+                gridViewActions.Add(currentAction.ClickType+" click at (" + currentAction.Xpos +","+currentAction.Ypos+")");
                 script.Add(currentAction);
             }
             else if (TypeComboBox.Text == "Command")
@@ -71,17 +70,24 @@ namespace AwesomeAutoClicker.Views
 
         private void Del_Click(object sender, RoutedEventArgs e)
         {
-            //if (EventEntries.SelectedIndex == -1)
-            //{
-            //    EventEntries.Items.RemoveAt(0);
-            //    return;
-            //}
-            //EventEntries.Items.RemoveAt(EventEntries.SelectedIndex);
+            var index = actions.SelectedIndex;
+            if (index == -1)
+            { 
+                gridViewActions.RemoveAt(0);
+                script.RemoveAt(script.Count-1);
+            }else
+            {
+                gridViewActions.RemoveAt(index);
+                script.RemoveAt(script.Count - 1-index);
+            }
+            
+            
         }
 
         private void Clr_Click(object sender, RoutedEventArgs e)
         {
             gridViewActions.Clear();
+            script.Clear();
         }
         
 
