@@ -23,12 +23,11 @@ namespace AwesomeAutoClicker.Views
     public partial class AdvancedView : UserControl
     {
         List<Models.Action> script = new List<Models.Action>();
-        ObservableCollection<GridViewAction> gridViewActions = new ObservableCollection<GridViewAction>(); 
+        List<string> gridViewActions = new List<string>(); 
         public AdvancedView()
         {
             InitializeComponent();
-            gridViewActions.Add(new GridViewAction("hi", "1"));
-            actions.SetBinding(ListView.ItemsSourceProperty, new Binding { Source = gridViewActions } );
+            actions.ItemsSource = gridViewActions;
 
         }
 
@@ -36,15 +35,12 @@ namespace AwesomeAutoClicker.Views
         private void Add_Click(object sender, RoutedEventArgs e)
         {
 
-            //Models.Action currentAction = new Models.Action(TypeComboBox.Text, "hi", 1, 2, 2, "hi,", "hi");
-
-
             if (TypeComboBox.Text == "Click")
             {
                 if (XPos.Text == null ||  XPos.Text.Length == 0 || YPos.Text == null || YPos.Text.Length == 0 || ClickType.Text == null || ClickType.Text.Length == 0)
                 { return; }
                 Models.Action currentAction = new Models.Action(TypeComboBox.Text, ClickType.Text, int.Parse(XPos.Text), int.Parse(YPos.Text), null, null, null);
-                gridViewActions.Insert(0, new Models.GridViewAction(currentAction.Type, currentAction.ClickType+" at (" + currentAction.Xpos +","+currentAction.Ypos+")"));
+                gridViewActions.Add(currentAction.ClickType+" at (" + currentAction.Xpos +","+currentAction.Ypos+")");
                 script.Add(currentAction);
             }
             else if (TypeComboBox.Text == "Command")
@@ -52,7 +48,7 @@ namespace AwesomeAutoClicker.Views
                 if (CmdChar.Text == null || CmdChar.Text.Length == 0)
                 { return; }
                 Models.Action currentAction = new Models.Action(TypeComboBox.Text,null,null, null, null, null, CmdChar.Text);
-                gridViewActions.Insert(0, new Models.GridViewAction(currentAction.Type, "Ctrl + "+currentAction.CmdChar));
+                gridViewActions.Add("Ctrl + " + currentAction.CmdChar);
                 script.Add(currentAction);
             }
             else if (TypeComboBox.Text == "Interval")
@@ -60,7 +56,7 @@ namespace AwesomeAutoClicker.Views
                 if (Milliseconds.Text == null || Milliseconds.Text.Length == 0)
                 { return; }
                 Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, int.Parse(Milliseconds.Text), null, null);
-                gridViewActions.Insert(0, new Models.GridViewAction(currentAction.Type, "Wait "+currentAction.Milliseconds+" milliseconds"));
+                gridViewActions.Add("Wait "+currentAction.Milliseconds+" milliseconds");
                 script.Add(currentAction);
             }
             else if (TypeComboBox.Text == "Send")
@@ -68,7 +64,7 @@ namespace AwesomeAutoClicker.Views
                 if (Message.Text == null || Message.Text.Length == 0)
                 { return; }
                 Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, null, Message.Text, null);
-                gridViewActions.Insert(0, new Models.GridViewAction(currentAction.Type, "Send Message: "+currentAction.Message));
+                gridViewActions.Add("Send Message: "+currentAction.Message);
                 script.Add(currentAction);
             }
         }
@@ -81,16 +77,15 @@ namespace AwesomeAutoClicker.Views
             //    return;
             //}
             //EventEntries.Items.RemoveAt(EventEntries.SelectedIndex);
-            gridViewActions.Add(new GridViewAction("hi", "2"));
         }
 
         private void Clr_Click(object sender, RoutedEventArgs e)
         {
             gridViewActions.Clear();
         }
+        
 
-
-        private void TypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TypeComboBox_MouseLeave(object sender, MouseEventArgs e)
         {
             if (TypeComboBox.Text == "Click")
             {
@@ -128,9 +123,6 @@ namespace AwesomeAutoClicker.Views
                 MessageOption.Visibility = Visibility.Visible;
                 CmdCharOption.Visibility = Visibility.Collapsed;
             }
-            TypeComboBox.SelectedItem = TypeComboBox.SelectedItem;
         }
-
-        
     }
 }

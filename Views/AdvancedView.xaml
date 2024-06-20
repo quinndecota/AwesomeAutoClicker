@@ -45,9 +45,9 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <ComboBox Margin="10" Grid.Column="0" Name="TypeComboBox" SelectionChanged="TypeComboBox_SelectionChanged"  >
-                    <ComboBoxItem Content="Click" />
-                    <ComboBoxItem Content="Send" />
+                <ComboBox Margin="10" Grid.Column="0" Name="TypeComboBox" MouseLeave="TypeComboBox_MouseLeave"  >
+                    <ComboBoxItem Name="ClickItem" Content="Click" />
+                    <ComboBoxItem Name="SendItem" Content="Send" />
                     <ComboBoxItem Content="Command" />
                     <ComboBoxItem Content="Interval" />
                 </ComboBox>
@@ -86,25 +86,22 @@
                     </StackPanel>
                 </StackPanel>
 
-                <ListView Name="actions" DataContext="{Binding gridViewActions}" ItemsSource="{Binding}" Margin=" 60 30 60 30" Grid.Row="2" Grid.ColumnSpan="4"  >
+                <ListView  Name="actions"  Margin=" 60 30 60 30" Grid.Row="2" Grid.ColumnSpan="4"  >
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock FontSize="20" Text="{Binding}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
 
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="Width" Value="146" />
                         </Style>
                     </ListView.ItemContainerStyle>
-                    
-                    <ListView.View>
-                        <GridView >
-                            <GridViewColumn Header="Type">
-                                
-                            </GridViewColumn>
-                            <GridViewColumn Header="Description">
-
-                            </GridViewColumn>
-
-                        </GridView>
-                    </ListView.View>
                 </ListView>
             </Grid>
         </Grid>
