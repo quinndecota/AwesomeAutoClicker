@@ -21,7 +21,7 @@ using System.Drawing.Drawing2D;
 using System.Threading;
 using InputSimulatorStandard;
 using InputSimulatorStandard.Native;
-
+using AwesomeAutoClicker.Commands;
 
 namespace AwesomeAutoClicker.Views
 {
@@ -31,37 +31,16 @@ namespace AwesomeAutoClicker.Views
     public partial class AdvancedView : System.Windows.Controls.UserControl
     {
         List<Models.Action> script = new List<Models.Action>();
-        ObservableCollection<string> gridViewActions = new ObservableCollection<string>();
         InputSimulator input = new InputSimulator();
-        private IKeyboardMouseEvents m_GlobalHook;
+        public ICommand showExportCommand { get; set; }
+        ObservableCollection<string> gridViewActions = new ObservableCollection<string>();
 
         public AdvancedView()
         {
             InitializeComponent();
             actions.ItemsSource = gridViewActions;
-            Subscribe();
         }
 
-        #region Input Things
-        public void Subscribe()
-        {
-            m_GlobalHook = Hook.GlobalEvents();
-
-            m_GlobalHook.MouseMoveExt += GlobalHookMouseMoveExt;
-        }
-
-        private void GlobalHookMouseMoveExt(object? sender, MouseEventExtArgs e)
-        {
-            CoordDisplay.Text = "("+e.X+","+e.Y+")";
-        }
-
-        public void Unsubscribe()
-        {
-            m_GlobalHook.MouseMoveExt -= GlobalHookMouseMoveExt;
-
-            m_GlobalHook.Dispose();
-        }
-        #endregion
 
         #region Change Textbox Visibility
         private void TypeComboBox_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
@@ -110,17 +89,17 @@ namespace AwesomeAutoClicker.Views
 
             if (TypeComboBox.Text == "Click")
             {
-                if (XPos.Text == null ||  XPos.Text.Length == 0 || YPos.Text == null || YPos.Text.Length == 0 || ClickType.Text == null || ClickType.Text.Length == 0)
+                if (XPos.Text == null || XPos.Text.Length == 0 || YPos.Text == null || YPos.Text.Length == 0 || ClickType.Text == null || ClickType.Text.Length == 0)
                 { return; }
                 Models.Action currentAction = new Models.Action(TypeComboBox.Text, ClickType.Text, int.Parse(XPos.Text), int.Parse(YPos.Text), null, null, null);
-                gridViewActions.Add(currentAction.ClickType+" click at (" + currentAction.Xpos +","+currentAction.Ypos+")");
+                gridViewActions.Add(currentAction.ClickType + " click at (" + currentAction.Xpos + "," + currentAction.Ypos + ")");
                 script.Add(currentAction);
             }
             else if (TypeComboBox.Text == "Command")
             {
                 if (CmdChar.Text == null || CmdChar.Text.Length == 0)
                 { return; }
-                Models.Action currentAction = new Models.Action(TypeComboBox.Text,null,null, null, null, null, CmdChar.Text);
+                Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, null, null, CmdChar.Text);
                 gridViewActions.Add("Ctrl + " + currentAction.CmdChar);
                 script.Add(currentAction);
             }
@@ -129,7 +108,7 @@ namespace AwesomeAutoClicker.Views
                 if (Milliseconds.Text == null || Milliseconds.Text.Length == 0)
                 { return; }
                 Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, int.Parse(Milliseconds.Text), null, null);
-                gridViewActions.Add("Wait: "+currentAction.Milliseconds+" milliseconds");
+                gridViewActions.Add("Wait: " + currentAction.Milliseconds + " milliseconds");
                 script.Add(currentAction);
             }
             else if (TypeComboBox.Text == "Send")
@@ -137,28 +116,29 @@ namespace AwesomeAutoClicker.Views
                 if (Message.Text == null || Message.Text.Length == 0)
                 { return; }
                 Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, null, Message.Text, null);
-                gridViewActions.Add("Send Message: "+currentAction.Message);
+                gridViewActions.Add("Send Message: " + currentAction.Message);
                 script.Add(currentAction);
 
-                
+
             }
-            
+
         }
 
         private void Del_Click(object sender, RoutedEventArgs e)
         {
             var index = actions.SelectedIndex;
+            if (gridViewActions.Count < 1)
+            { return; }
             if (index == -1)
-            { 
+            {
                 gridViewActions.RemoveAt(0);
-                script.RemoveAt(script.Count-1);
-            }else
+                script.RemoveAt(0);
+            }
+            else
             {
                 gridViewActions.RemoveAt(index);
-                script.RemoveAt(script.Count - 1-index);
+                script.RemoveAt(index);
             }
-            
-            
         }
 
         private void Clr_Click(object sender, RoutedEventArgs e)
@@ -213,22 +193,110 @@ namespace AwesomeAutoClicker.Views
 
         private void ClickActionCommand(string clickType, int xpos, int ypos)
         {
-            input.Mouse.MoveMouseToPositionOnVirtualDesktop(xpos*1000/68, ypos*1000/21);
-            
+            input.Mouse.MoveMouseTo((xpos / 19.2) * 500, (ypos / 10.8) * 500);
+
             if (clickType == "Left")
             {
                 input.Mouse.LeftButtonClick();
-            } else
+            }
+            else
             {
                 input.Mouse.RightButtonClick();
             }
 
         }
-
-
-
         #endregion
+
+        #region Import/Export Code
+
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            string scriptString = "0";
+            foreach (Models.Action currentAction in script)
+            {
+                if (currentAction.Type == "Click")
+                {
+                    scriptString += "!";
+
+                    if (currentAction.ClickType == "Left")
+                    {
+                        scriptString += "1";
+                    }
+                    if (currentAction.ClickType == "Right")
+                    {
+                        scriptString += "2";
+                    }
+                    scriptString += currentAction.Xpos.ToString() + "," + currentAction.Ypos.ToString();
+                }
+                else if (currentAction.Type == "Interval")
+                {
+                    scriptString += "@" + currentAction.Milliseconds;
+                }
+                else if (currentAction.Type == "Command")
+                {
+                    scriptString += "#" + currentAction.CmdChar;
+                }
+                else if (currentAction.Type == "Send")
+                {
+                    scriptString += "$" + currentAction.Message;
+                }
+            }
+            System.Windows.Clipboard.SetText(scriptString);
+            System.Windows.MessageBox.Show("The Script for your macro has been copied to your clipboard: \n" + scriptString);
+        }
+
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ImportTextbox.Text.Length <= 1)
+            {
+                ImportTextbox.Visibility = Visibility.Visible;
+                return;
+            }
+
+            gridViewActions.Clear();
+            script.Clear();
+
+            string scriptString = ImportTextbox.Text;
+
+            string[] parts = scriptString.Split(new char[] { '!', '@', '#', '$' });
+            for (int i = 1; i < parts.Length; i++) // Start from 1 to skip the initial '0'
+            {
+                char prefix = scriptString[scriptString.IndexOf(parts[i]) - 1];
+                Models.Action action = new(null, null, null, null, null, null, null);
+
+                switch (prefix)
+                {
+                    case '!':
+                        action.Type = "Click";
+                        action.ClickType = parts[i][0] == '1' ? "Left" : "Right";
+                        string[] coordinates = parts[i].Substring(1).Split(',');
+                        action.Xpos = int.Parse(coordinates[0]);
+                        action.Ypos = int.Parse(coordinates[1]);
+                        gridViewActions.Add(action.ClickType + " click at (" + action.Xpos + "," + action.Ypos + ")");
+                        break;
+                    case '@':
+                        action.Type = "Interval";
+                        action.Milliseconds = int.Parse(parts[i]);
+                        gridViewActions.Add("Wait: " + action.Milliseconds + " milliseconds");
+                        break;
+                    case '#':
+                        action.Type = "Command";
+                        action.CmdChar = parts[i];
+                        gridViewActions.Add("Ctrl + " + action.CmdChar);
+                        break;
+                    case '$':
+                        action.Type = "Send";
+                        action.Message = parts[i];
+                        gridViewActions.Add("Send Message: " + action.Message);
+                        break;
+                }
+                script.Add(action);
+            }
+
+
+            #endregion
 
 
         }
+    }
 }

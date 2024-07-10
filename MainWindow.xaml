@@ -20,10 +20,11 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <DockPanel Name="menuDockPanel" Grid.Row="0" Background="White">
+            <DockPanel Name="menuDockPanel" Grid.Row="0" Background="White" >
                 <Button Command="{Binding ShowAboutCommand}" Content="About"  Padding="10 0 10 0"/>
-                <Button Command="{Binding NavigateCommand}" CommandParameter="Home" Content="Home"  Padding="10 0 10 0"/>
-                <Button Command="{Binding NavigateCommand}" CommandParameter="Advanced"  Content="Advanced" Padding="10 0 10 0" Margin="0 0 370 0"/>
+                <Button Command="{Binding NavigateCommand}" CommandParameter="Home" Content="AutoClicker"  Padding="10 0 10 0"/>
+                <Button Command="{Binding NavigateCommand}" CommandParameter="Advanced"  Content="MacroMaker" Padding="10 0 10 0" Width="auto"/>
+                <TextBlock Name="CoordDisplay" Text="Your mouse is at (,)"  Margin="120 0 0 0"/>
             </DockPanel>
             <Grid Grid.Row="1">
                 <ContentControl Content="{Binding SelectedViewModel}" />
