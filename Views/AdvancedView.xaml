@@ -44,7 +44,8 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <TextBox Name="ImportTextbox" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Width="100" />
+                <TextBox Name="ImportTextbox" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Width="100" Margin="7 0 0 0"/>
+                <TextBlock Foreground="Red" HorizontalAlignment="Center" Visibility="Hidden" Name="ImportErrorText">Corrupted Import File</TextBlock>
             </StackPanel>
             <Grid Grid.Column="1" Grid.Row="1">
                 <Grid.RowDefinitions>
@@ -81,6 +82,7 @@
                         <ComboBox Name="ClickType" >
                             <ComboBoxItem Content="Left" />
                             <ComboBoxItem Content="Right" />
+                            <ComboBoxItem Content="Hover" />
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Width="100" Name="XPosOption" Visibility="Collapsed" Margin="0 0 30 0">
@@ -99,7 +101,7 @@
                         <Label Content="Message" />
                         <TextBox Name="Message" />
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" Width="150" Name="CmdCharOption" Visibility="Collapsed">
+                    <StackPanel Orientation="Vertical" Width="200" Name="CmdCharOption" Visibility="Collapsed">
                         <Label Content="Command Character (Ctrl+?)" />
                         <TextBox Name="CmdChar" />
                     </StackPanel>
