@@ -52,7 +52,7 @@
             <GroupBox Name="clickIntervalGroupBox" 
       Header="Click Interval" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,0,0,95" Grid.RowSpan="2">
                 <Grid Name="clickIntervalInnerGrid"
-      HorizontalAlignment="Center" VerticalAlignment="Center">
+      HorizontalAlignment="Center" VerticalAlignment="Center" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
@@ -91,11 +91,11 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <RadioButton Grid.Row="0" Grid.Column="0" Margin="0, 0, 0, 5"
-                 Content="Infinite (Until stopped)"/>
-                    <RadioButton Grid.Row="1" Grid.ColumnSpan="2" Margin="0, 0, 0, 5">
+                    <RadioButton Grid.Row="0" Grid.Column="0" Margin="0, 0, 0, 5" 
+                 Content="Infinite (Until stopped)" Name="Infinite"/>
+                    <RadioButton Grid.Row="1" Grid.ColumnSpan="2" Margin="0, 0, 0, 5" >
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Width="50" Margin="5, 0, 0, 0"/>
+                            <TextBox Width="50" Margin="5, 0, 0, 0" Name="RepeatCount"/>
                             <TextBlock Text="Times" Margin="5, 0, 0, 0" />
                         </StackPanel>
                     </RadioButton>
@@ -129,11 +129,6 @@
                             <TextBlock Text="Y" Margin="5, 0, 0, 0"/>
                             <TextBox Width="50" Margin="5, 0, 0, 5"
                      Name="TextBoxPickedYValue"/>
-                            <Button Name="CaptureMouseScreenCoordinatesButton"
-                    Margin="5, 0, 0, 0" Width="20" Height="20"
-                    ToolTip="Use the mouse to capture coordinates on the screen where you want to click.">
-                                <Image Source="../Resources/Icons/cursorForNav.ico"></Image>
-                            </Button>
                         </StackPanel>
                     </RadioButton>
                 </Grid>
@@ -142,24 +137,20 @@
             <GroupBox Name="clickOptionGroupBox"
       Header="Click Options" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,0,0,100" Grid.RowSpan="2">
                 <UniformGrid Name="clickOptionInnerGrid"
-             HorizontalAlignment="Center" VerticalAlignment="Stretch" Rows="1" Columns="4">
+             HorizontalAlignment="Center" VerticalAlignment="Stretch" Rows="1" Columns="2">
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Mouse Button"
                Margin="5, 5, 5, 5" VerticalAlignment="Center" TextAlignment="Center"/>
                     <ComboBox Grid.Row="0" Grid.Column="1" Margin="5, 5, 5, 5"
-              SelectedIndex="0"  HorizontalAlignment="Stretch"/>
-                    <TextBlock Grid.Row="0" Grid.Column="2" Text="Click Type"
-               Margin="5, 5, 5, 5" VerticalAlignment="Center" TextAlignment="Center"/>
-                    <ComboBox Grid.Row="0" Grid.Column="3" Margin="0, 5, 5, 5"
               SelectedIndex="0"  HorizontalAlignment="Stretch"/>
                 </UniformGrid>
             </GroupBox>
 
             <UniformGrid Name="buttonsGrid"
-         Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Rows="2" Columns="3" Margin="0 30 0 0">
+         Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Rows="1" Columns="3" Margin="0 30 0 0">
 
                 <Button Name="startButton"
         Grid.Row="0" Grid.Column="0" Margin="5"
-        Content="Start (F6)" >
+        Content="Start (Y)" >
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -168,46 +159,15 @@
                 </Button>
                 <Button Name="stopButton"
         Grid.Row="0" Grid.Column="1" Margin="5"
-        Content="Stop (F7)" >
+        Content="Stop (N)" >
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Name="toggleButton" 
-        Grid.Row="0" Grid.Column="1" Margin="5"
-        Content="Toggle (F8)" >
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Button Name="saveSettingsButton"
-        Grid.Row="1" Grid.Column="0" Margin="5"
-        Content="Save Settings" >
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Button Name="hotkeysButton"
-        Grid.Row="1" Grid.Column="1" Margin="5"
-        Content="Hotkeys" >
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <CheckBox Name="topMostCheckBox"
-          Grid.Row="1" Grid.Column="1" Margin="5"
-          VerticalAlignment="Center" HorizontalAlignment="Center"
-          Content="Top most window">
+                <TextBlock Foreground="White"    Grid.Row="0" Grid.Column="2" Margin="5" Name="RunningStats" />
 
-                </CheckBox>
             </UniformGrid>
         </Grid>
     </Grid>

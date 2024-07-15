@@ -3,12 +3,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AwesomeAutoClicker.ViewModels;
+using AwesomeAutoClicker.Views;
 using Gma.System.MouseKeyHook;
 
 namespace AwesomeAutoClicker
@@ -33,8 +35,12 @@ namespace AwesomeAutoClicker
             m_GlobalHook = Hook.GlobalEvents();
 
             m_GlobalHook.MouseMoveExt += GlobalHookMouseMoveExt;
+
+
+
         }
 
+        
         private void GlobalHookMouseMoveExt(object? sender, MouseEventExtArgs e)
         {
             CoordDisplay.Text = "Your mouse is at (" + e.X + "," + e.Y + ")";

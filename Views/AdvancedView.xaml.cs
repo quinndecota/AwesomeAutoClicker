@@ -32,7 +32,6 @@ namespace AwesomeAutoClicker.Views
     {
         List<Models.Action> script = new List<Models.Action>();
         InputSimulator input = new InputSimulator();
-        public ICommand showExportCommand { get; set; }
         ObservableCollection<string> gridViewActions = new ObservableCollection<string>();
 
         double screenWidth = SystemParameters.PrimaryScreenWidth;
@@ -229,7 +228,7 @@ namespace AwesomeAutoClicker.Views
             {
                 if (currentAction.Type == "Click")
                 {
-                    scriptString += "!";
+                    scriptString += "|";
 
                     if (currentAction.ClickType == "Left")
                     {
@@ -247,15 +246,15 @@ namespace AwesomeAutoClicker.Views
                 }
                 else if (currentAction.Type == "Interval")
                 {
-                    scriptString += "@" + currentAction.Milliseconds;
+                    scriptString += "\\" + currentAction.Milliseconds;
                 }
                 else if (currentAction.Type == "Command")
                 {
-                    scriptString += "#" + currentAction.CmdChar;
+                    scriptString += "`" + currentAction.CmdChar;
                 }
                 else if (currentAction.Type == "Send")
                 {
-                    scriptString += "$" + currentAction.Message;
+                    scriptString += "~" + currentAction.Message;
                 }
             }
             System.Windows.Clipboard.SetText(scriptString);
@@ -277,7 +276,7 @@ namespace AwesomeAutoClicker.Views
            
             try
             {
-                string[] parts = scriptString.Split(new char[] { '!', '@', '#', '$' });
+                string[] parts = scriptString.Split(new char[] { '|', '\\', '`', '~' });
                 if (parts.Length <2)
                 {
                     throw new Exception();
@@ -289,7 +288,7 @@ namespace AwesomeAutoClicker.Views
 
                     switch (prefix)
                     {
-                        case '!':
+                        case '|':
                             action.Type = "Click";
 
                             switch (parts[i][0])
@@ -303,26 +302,23 @@ namespace AwesomeAutoClicker.Views
                                 case '3':
                                     action.ClickType = "Hover";
                                     break;
-
                             }
-
-
                             string[] coordinates = parts[i].Substring(1).Split(',');
                             action.Xpos = int.Parse(coordinates[0]);
                             action.Ypos = int.Parse(coordinates[1]);
                             gridViewActions.Add(action.ClickType + " click at (" + action.Xpos + "," + action.Ypos + ")");
                             break;
-                        case '@':
+                        case '\\':
                             action.Type = "Interval";
                             action.Milliseconds = int.Parse(parts[i]);
                             gridViewActions.Add("Wait: " + action.Milliseconds + " milliseconds");
                             break;
-                        case '#':
+                        case '`':
                             action.Type = "Command";
                             action.CmdChar = parts[i];
                             gridViewActions.Add("Ctrl + " + action.CmdChar);
                             break;
-                        case '$':
+                        case '~':
                             action.Type = "Send";
                             action.Message = parts[i];
                             gridViewActions.Add("Send Message: " + action.Message);
@@ -334,19 +330,14 @@ namespace AwesomeAutoClicker.Views
                     }
                     script.Add(action);
                 }
-
-                
-
             }
             catch
             {
                 Clr_Click(sender, e);
-
                 ImportErrorText.Visibility = Visibility.Visible;
                 return;
             }
-ImportErrorText.Visibility = Visibility.Hidden;
-
+        ImportErrorText.Visibility = Visibility.Hidden;
         }
         #endregion
 
