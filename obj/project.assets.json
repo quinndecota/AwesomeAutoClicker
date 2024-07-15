@@ -1,11 +1,92 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {}
+    "net8.0-windows7.0": {
+      "InputSimulator/1.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net20/WindowsInput.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net20/WindowsInput.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "InputSimulatorStandard/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/InputSimulatorStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/InputSimulatorStandard.dll": {}
+        }
+      },
+      "MouseKeyHook/5.7.1": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0-windows7.0/Gma.System.MouseKeyHook.dll": {}
+        },
+        "runtime": {
+          "lib/net7.0-windows7.0/Gma.System.MouseKeyHook.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "InputSimulator/1.0.4": {
+      "sha512": "D0LvRCPQMX6/FJHBjng+RO+wRDuHTJrfo7IAc7rmkPvRqchdVGJWg3y70peOtDy3OLNK+HSOwVkH4GiuLnkKgA==",
+      "type": "package",
+      "path": "inputsimulator/1.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "inputsimulator.1.0.4.nupkg.sha512",
+        "inputsimulator.nuspec",
+        "lib/net20/WindowsInput.dll",
+        "lib/net20/WindowsInput.xml"
+      ]
+    },
+    "InputSimulatorStandard/1.0.0": {
+      "sha512": "qJ4MVLBPJ9iOIbieFaZ/62BDBZ8jvA3hjYr0XY69vU6qcjYJi+Cn+pSKYyUE/Nu9w+OBz34RfLraIcXigRyWbw==",
+      "type": "package",
+      "path": "inputsimulatorstandard/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "inputsimulatorstandard.1.0.0.nupkg.sha512",
+        "inputsimulatorstandard.nuspec",
+        "lib/netstandard2.0/InputSimulatorStandard.dll"
+      ]
+    },
+    "MouseKeyHook/5.7.1": {
+      "sha512": "c0VhB6cbcOpMOcoCQmvPMVqxaH76S4IPHwpbCIY7XKUNimdj9+81rX+Evnu5O53xYgUvdD7g0qmlVeZP2wGCnA==",
+      "type": "package",
+      "path": "mousekeyhook/5.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/Gma.System.MouseKeyHook.dll",
+        "lib/net48/Gma.System.MouseKeyHook.dll",
+        "lib/net6.0-windows7.0/Gma.System.MouseKeyHook.dll",
+        "lib/net7.0-windows7.0/Gma.System.MouseKeyHook.dll",
+        "mouse-keyboard-hook-logo64x64.png",
+        "mousekeyhook.5.7.1.nupkg.sha512",
+        "mousekeyhook.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": []
+    "net8.0-windows7.0": [
+      "InputSimulator >= 1.0.4",
+      "InputSimulatorStandard >= 1.0.0",
+      "MouseKeyHook >= 5.7.1"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Quinn DeCota\\.nuget\\packages\\": {},
@@ -56,6 +137,20 @@
     "frameworks": {
       "net8.0-windows7.0": {
         "targetAlias": "net8.0-windows",
+        "dependencies": {
+          "InputSimulator": {
+            "target": "Package",
+            "version": "[1.0.4, )"
+          },
+          "InputSimulatorStandard": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
+          "MouseKeyHook": {
+            "target": "Package",
+            "version": "[5.7.1, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -78,5 +173,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'InputSimulator 1.0.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "InputSimulator",
+      "targetGraphs": [
+        "net8.0-windows7.0"
+      ]
+    }
+  ]
 }

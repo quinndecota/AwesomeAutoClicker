@@ -1,8 +1,23 @@
 {
   "version": 2,
-  "dgSpecHash": "xx3qhaUdaWgtPDnQ5bblNuWQzXYSdaGMJeWl/LDhNcPaDi82koZuSN080PmBBKgoZEH+XREXh8dY96eHSiU8dQ==",
+  "dgSpecHash": "C3i5eiWbUn84g55nwZW4L1I0nPauB8Vzo0NqFEbSpourVn6PWpbQ36MM8y4Oplz5tMywR9O/hEImv42OuVba/w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\AwesomeAutoClicker.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "expectedPackageFiles": [
+    "C:\\Users\\Quinn DeCota\\.nuget\\packages\\inputsimulator\\1.0.4\\inputsimulator.1.0.4.nupkg.sha512",
+    "C:\\Users\\Quinn DeCota\\.nuget\\packages\\inputsimulatorstandard\\1.0.0\\inputsimulatorstandard.1.0.0.nupkg.sha512",
+    "C:\\Users\\Quinn DeCota\\.nuget\\packages\\mousekeyhook\\5.7.1\\mousekeyhook.5.7.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'InputSimulator 1.0.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "InputSimulator",
+      "targetGraphs": [
+        "net8.0-windows7.0"
+      ]
+    }
+  ]
 }
