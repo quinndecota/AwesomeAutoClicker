@@ -52,8 +52,8 @@ InitializeComponent();
         }
 
         private void GlobalHookKeyPress(object? sender, KeyPressEventArgs e)
-        {            
-if (e.KeyChar == 'y' || e.KeyChar == 'Y')
+        {
+            if (e.KeyChar == 'y' || e.KeyChar == 'Y')
             {
                 Start();
             }
