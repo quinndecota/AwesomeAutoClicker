@@ -18,6 +18,8 @@ using Gma.System.MouseKeyHook;
 using System.Windows.Forms;
 using System.Security.Cryptography.X509Certificates;
 using System.Configuration;
+using System.Runtime.InteropServices.Marshalling;
+using AwesomeAutoClicker.ViewModels;
 
 namespace AwesomeAutoClicker.Views
 {
@@ -27,16 +29,19 @@ namespace AwesomeAutoClicker.Views
     public partial class HomeView : System.Windows.Controls.UserControl
     {
 InputSimulator input = new();
-        private IKeyboardMouseEvents m_GlobalHook;
+        private IKeyboardMouseEvents? m_GlobalHook;
+        double screenWidth = SystemParameters.PrimaryScreenWidth;
+        double screenHeight = SystemParameters.PrimaryScreenHeight;
 
-        public HomeView()
-        {
-            InitializeComponent();
+        public HomeView() { 
+InitializeComponent();        
+            
             Subscribe();
 
+            SelectedLocationRadioButton.IsChecked = false;
 
         }
-
+        #region input stuff
         public void Subscribe()
         {
             m_GlobalHook = Hook.GlobalEvents();
@@ -47,8 +52,8 @@ InputSimulator input = new();
         }
 
         private void GlobalHookKeyPress(object? sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 'y' || e.KeyChar == 'Y')
+        {            
+if (e.KeyChar == 'y' || e.KeyChar == 'Y')
             {
                 Start();
             }
@@ -64,30 +69,47 @@ InputSimulator input = new();
             m_GlobalHook.Dispose();
         }
 
-
+        #endregion
         public bool stop { get; set; }
         private void Start()
         {
+            RunningStats.Text = "Running :)";
+            stop = false;
+            DataContext = new HomeVM(false);
+            int timeInMilliseconds = GetTimeInMilliseconds();
+            if (timeInMilliseconds <1)
+            {
+                System.Windows.MessageBox.Show("Enter a valid amount of time between clicks");
+                return;
+            }
             if (Infinite.IsChecked == true)
             {
                 while (!stop)
                 {
-                    Thread.Sleep(1000);
+                    
+                    DoHomeViewMouseClick();
+                    Wait(timeInMilliseconds);
                 }
             }
             else
             {
-                int count;
+                int count = 0;
                 try
                 {
                     count = Int32.Parse(RepeatCount.Text);
-                } catch
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (stop)
+                        {
+                                return; 
+                        }
+                        DoHomeViewMouseClick();
+                        Wait(timeInMilliseconds);
+                    }
+                }
+                catch
                 {
                     return;
-                }
-                for (int i = 0; i < count; i++)
-                {
-
                 }
             }
         }
@@ -95,6 +117,130 @@ InputSimulator input = new();
         private void Stop()
         {
             stop = true;
+            RunningStats.Text = "Not Running";
         }
+
+        private int GetTimeInMilliseconds()
+        {
+            int timeInMilliseconds = 0;
+            int current = 0;
+            try
+            {
+                if (Hours.Text == null)
+                {
+                    throw new Exception();
+                }
+                current = Int32.Parse(Hours.Text);
+            }
+            catch
+            {
+                current = 0;
+            }
+            timeInMilliseconds += current * 3600000;
+            try
+            {
+                if (Minutes.Text == null)
+                {
+                    throw new Exception();
+                }
+                current = Int32.Parse(Minutes.Text);
+            }
+            catch
+            {
+                current = 0;
+            }
+            timeInMilliseconds += current * 60000;
+            try
+            {
+                if (Seconds.Text == null)
+                {
+                    throw new Exception();
+                }
+                current = Int32.Parse(Seconds.Text);
+            }
+            catch
+            {
+                current = 0;
+            }
+            timeInMilliseconds += current * 1000;
+            try
+            {
+                if (Milliseconds.Text == null)
+                {
+                    throw new Exception();
+                }
+                current = Int32.Parse(Milliseconds.Text);
+            }
+            catch
+            {
+                current = 0;
+            }
+            return timeInMilliseconds + current;
+
+        }
+
+        private void DoHomeViewMouseClick()
+        {
+            if (ClickType.Text == "Left")
+            {
+                input.Mouse.LeftButtonClick();
+            }
+            if (ClickType.Text == "Middle")
+            {
+                input.Mouse.MiddleButtonClick();
+            }
+            if (ClickType.Text == "Right")
+            {
+                input.Mouse.RightButtonClick();
+            }
+            if ((bool)SelectedLocationRadioButton.IsChecked)
+            {
+                try
+                {
+                    int xpos = Int32.Parse(TextBoxPickedXValue.Text);
+                    int ypos = Int32.Parse(TextBoxPickedYValue.Text);
+                    input.Mouse.MoveMouseTo((xpos * 65615 / (screenWidth)), (ypos * 65615 / (screenHeight)));
+                } catch
+                {
+                    SelectedLocationRadioButton.IsChecked = false;
+                    RadioButtonSelectedLocationMode_CurrentLocation.IsChecked = true;
+                }
+            }
+        }
+
+        public static void Wait(int milliseconds)
+        {
+            var timer1 = new System.Windows.Forms.Timer();
+            if (milliseconds == 0 || milliseconds < 0)
+                return;
+
+            // Console.WriteLine("start wait timer");
+            timer1.Interval = milliseconds;
+            timer1.Enabled = true;
+            timer1.Start();
+
+            timer1.Tick += (s, e) =>
+            {
+                timer1.Enabled = false;
+                timer1.Stop();
+                // Console.WriteLine("stop wait timer");
+            };
+
+            while (timer1.Enabled)
+            {
+                System.Windows.Forms.Application.DoEvents();
+            }
+        }
+
+        #region Start/Stop Buttons
+        private void startButton_Click(object sender, RoutedEventArgs e)
+        {
+            Start();
+        }
+        private void stopButton_Click(object sender, RoutedEventArgs e)
+        {
+            Stop();
+        }
+        #endregion
     }
 }

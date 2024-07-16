@@ -10,5 +10,10 @@ namespace AwesomeAutoClicker.ViewModels
 {
     public  class AdvancedVM : ViewModelBase
     {
+        public bool canNavigate = true;
+        public AdvancedVM(bool _stop)
+        {
+            canNavigate = _stop;
+        }
     }
 }

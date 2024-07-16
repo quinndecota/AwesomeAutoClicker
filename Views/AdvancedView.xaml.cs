@@ -22,6 +22,8 @@ using System.Threading;
 using InputSimulatorStandard;
 using InputSimulatorStandard.Native;
 using AwesomeAutoClicker.Commands;
+using System.Reflection;
+using AwesomeAutoClicker.ViewModels;
 
 namespace AwesomeAutoClicker.Views
 {
@@ -33,7 +35,8 @@ namespace AwesomeAutoClicker.Views
         List<Models.Action> script = new List<Models.Action>();
         InputSimulator input = new InputSimulator();
         ObservableCollection<string> gridViewActions = new ObservableCollection<string>();
-
+        private IKeyboardMouseEvents? m_GlobalHook;
+        private bool stop = false;
         double screenWidth = SystemParameters.PrimaryScreenWidth;
         double screenHeight = SystemParameters.PrimaryScreenHeight;
 
@@ -44,51 +47,13 @@ namespace AwesomeAutoClicker.Views
             actions.ItemsSource = gridViewActions;
         }
 
-
-        #region Change Textbox Visibility
-        private void TypeComboBox_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (TypeComboBox.Text == "Click")
-            {
-                ClickTypeOption.Visibility = Visibility.Visible;
-                XPosOption.Visibility = Visibility.Visible;
-                YPosOption.Visibility = Visibility.Visible;
-                MillisecondsOption.Visibility = Visibility.Collapsed;
-                MessageOption.Visibility = Visibility.Collapsed;
-                CmdCharOption.Visibility = Visibility.Collapsed;
-            }
-            else if (TypeComboBox.Text == "Command")
-            {
-                ClickTypeOption.Visibility = Visibility.Collapsed;
-                XPosOption.Visibility = Visibility.Collapsed;
-                YPosOption.Visibility = Visibility.Collapsed;
-                MillisecondsOption.Visibility = Visibility.Collapsed;
-                MessageOption.Visibility = Visibility.Collapsed;
-                CmdCharOption.Visibility = Visibility.Visible;
-            }
-            else if (TypeComboBox.Text == "Interval")
-            {
-                ClickTypeOption.Visibility = Visibility.Collapsed;
-                XPosOption.Visibility = Visibility.Collapsed;
-                YPosOption.Visibility = Visibility.Collapsed;
-                MillisecondsOption.Visibility = Visibility.Visible;
-                MessageOption.Visibility = Visibility.Collapsed;
-                CmdCharOption.Visibility = Visibility.Collapsed;
-            }
-            else if (TypeComboBox.Text == "Send")
-            {
-                ClickTypeOption.Visibility = Visibility.Collapsed;
-                XPosOption.Visibility = Visibility.Collapsed;
-                YPosOption.Visibility = Visibility.Collapsed;
-                MillisecondsOption.Visibility = Visibility.Collapsed;
-                MessageOption.Visibility = Visibility.Visible;
-                CmdCharOption.Visibility = Visibility.Collapsed;
-            }
-        }
-        #endregion
-
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+            if (!(ValidateTextBoxes()))
+            {
+                return;
+            }
+
             var index = actions.SelectedIndex;
 
             if(index == -1)
@@ -155,12 +120,32 @@ namespace AwesomeAutoClicker.Views
 
         private void Run_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Models.Action currentAction in script)
+            stop = false;
+            if (loopScriptCheckBox.IsChecked == true)
             {
-                DoActionCommand(currentAction);
-            }
-        }
+                while (true)
+                {
+                    foreach (Models.Action currentAction in script)
+                    {
 
+                        if (stop)
+                        {
+                            return;
+                        }
+                        DoActionCommand(currentAction);
+                    }
+                }
+            }
+            foreach (Models.Action currentAction in script)
+                {
+                    if (stop)
+                    {
+                        return;
+                    }
+                    DoActionCommand(currentAction);
+                }
+    }
+        
         #region DoActionCommand
         private void DoActionCommand(Models.Action action)
         {
@@ -194,14 +179,11 @@ namespace AwesomeAutoClicker.Views
             input.Keyboard.TextEntry(message);
         }
 
-        private static void IntervalActionCommand(int milliseconds)
-        {
-            Thread.Sleep(milliseconds);
-        }
+        private void IntervalActionCommand(int m) => Wait(m);
 
         private void ClickActionCommand(string clickType, int xpos, int ypos)
         {
-            input.Mouse.MoveMouseTo((xpos* 65550 / (screenWidth)) , (ypos * 65550 / (screenHeight)) );
+            input.Mouse.MoveMouseTo((xpos* 65615 / (screenWidth)) , (ypos * 65615 / (screenHeight)) );
 
             if (clickType == "Left")
             {
@@ -215,7 +197,6 @@ namespace AwesomeAutoClicker.Views
             {
                 return;
             }
-
         }
         #endregion
 
@@ -341,7 +322,99 @@ namespace AwesomeAutoClicker.Views
         }
         #endregion
 
+        #region Input stuff
+        public void Subscribe()
+        {
+            m_GlobalHook = Hook.GlobalEvents();
 
+            m_GlobalHook.KeyPress += GlobalHookKeyPress;
+
+
+        }
+
+        private void GlobalHookKeyPress(object? sender, KeyPressEventArgs e)
+        {
+             if (e.KeyChar == 'n' || e.KeyChar == 'N')
+            {
+                stop = true;
+            }
+        }
+
+
+        public void Unsubscribe()
+        {
+            m_GlobalHook.KeyPress -= GlobalHookKeyPress;
+
+            m_GlobalHook.Dispose();
+        }
+
+        #endregion
+
+        #region Change Textbox Visibility
+                        private void TypeComboBox_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+                        {
+                            if (TypeComboBox.Text == "Click")
+                            {
+                                ClickTypeOption.Visibility = Visibility.Visible;
+                                XPosOption.Visibility = Visibility.Visible;
+                                YPosOption.Visibility = Visibility.Visible;
+                                MillisecondsOption.Visibility = Visibility.Collapsed;
+                                MessageOption.Visibility = Visibility.Collapsed;
+                                CmdCharOption.Visibility = Visibility.Collapsed;
+                            }
+                            else if (TypeComboBox.Text == "Command")
+                            {
+                                ClickTypeOption.Visibility = Visibility.Collapsed;
+                                XPosOption.Visibility = Visibility.Collapsed;
+                                YPosOption.Visibility = Visibility.Collapsed;
+                                MillisecondsOption.Visibility = Visibility.Collapsed;
+                                MessageOption.Visibility = Visibility.Collapsed;
+                                CmdCharOption.Visibility = Visibility.Visible;
+                            }
+                            else if (TypeComboBox.Text == "Interval")
+                            {
+                                ClickTypeOption.Visibility = Visibility.Collapsed;
+                                XPosOption.Visibility = Visibility.Collapsed;
+                                YPosOption.Visibility = Visibility.Collapsed;
+                                MillisecondsOption.Visibility = Visibility.Visible;
+                                MessageOption.Visibility = Visibility.Collapsed;
+                                CmdCharOption.Visibility = Visibility.Collapsed;
+                            }
+                            else if (TypeComboBox.Text == "Send")
+                            {
+                                ClickTypeOption.Visibility = Visibility.Collapsed;
+                                XPosOption.Visibility = Visibility.Collapsed;
+                                YPosOption.Visibility = Visibility.Collapsed;
+                                MillisecondsOption.Visibility = Visibility.Collapsed;
+                                MessageOption.Visibility = Visibility.Visible;
+                                CmdCharOption.Visibility = Visibility.Collapsed;
+                            }
+                        }
+                        #endregion
+
+        public void Wait(int milliseconds)
+        {
+            var timer1 = new System.Windows.Forms.Timer();
+            if (milliseconds == 0 || milliseconds < 0)
+                return;
+
+            // Console.WriteLine("start wait timer");
+            timer1.Interval = milliseconds;
+            timer1.Enabled = true;
+            timer1.Start();
+
+            timer1.Tick += (s, e) =>
+            {
+                timer1.Enabled = false;
+                timer1.Stop();
+                // Console.WriteLine("stop wait timer");
+            };
+
+            while (timer1.Enabled)
+            {
+                System.Windows.Forms.Application.DoEvents();
+            }
+        }
         private IEnumerable<VirtualKeyCode> GetVirtualKeyCode(string? cmdChar)
         {
             switch (cmdChar.ToLower())
@@ -428,6 +501,47 @@ namespace AwesomeAutoClicker.Views
 
             }
         }
+        private bool ValidateTextBoxes()
+        {
+            if (TypeComboBox.Text == "Click")
+            {
+                try
+                {
+                    int x = int.Parse(XPos.Text);
+                    int y = int.Parse(YPos.Text);
 
+                    if (x > screenWidth || y > screenHeight)
+                    {
+                        throw new Exception();
+                    }
+
+                } catch
+                {
+                    System.Windows.MessageBox.Show("Invalid Coordinates");
+                    return false;
+                }
+            }
+            else if (TypeComboBox.Text == "Command")
+            {
+                if (CmdChar.Text.Length != 1)
+                {
+                    System.Windows.MessageBox.Show("Invalid Command Character (Only 1 letter)");
+                    return false; 
+                }
+            }
+            else if (TypeComboBox.Text == "Interval")
+            {
+                try
+                {
+                    int x = int.Parse(Milliseconds.Text);
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Must type in an integer");
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

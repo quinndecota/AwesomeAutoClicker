@@ -35,9 +35,6 @@ namespace AwesomeAutoClicker
             m_GlobalHook = Hook.GlobalEvents();
 
             m_GlobalHook.MouseMoveExt += GlobalHookMouseMoveExt;
-
-
-
         }
 
         
@@ -52,6 +49,9 @@ namespace AwesomeAutoClicker
 
             m_GlobalHook.Dispose();
         }
+
+
         #endregion
+
     }
 }

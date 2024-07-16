@@ -11,6 +11,7 @@ namespace AwesomeAutoClicker.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public bool canNavigate { get; set; }
         protected void OnPropertyChanged(string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

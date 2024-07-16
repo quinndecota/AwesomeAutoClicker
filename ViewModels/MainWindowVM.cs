@@ -28,7 +28,7 @@ namespace AwesomeAutoClicker.ViewModels
 
         public MainWindowVM()
         {
-            SelectedViewModel = new HomeVM();
+            SelectedViewModel = new HomeVM(true);
             NavigateCommand = new NavigateCommand(this);
             ShowAboutCommand = new ShowAboutCommand();
         }
