@@ -3,6 +3,10 @@ C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\bin\Debug\net8.0-wind
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\bin\Debug\net8.0-windows\AwesomeAutoClicker.runtimeconfig.json
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\bin\Debug\net8.0-windows\AwesomeAutoClicker.dll
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\bin\Debug\net8.0-windows\AwesomeAutoClicker.pdb
+C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\bin\Debug\net8.0-windows\WindowsInput.dll
+C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\bin\Debug\net8.0-windows\InputSimulatorStandard.dll
+C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\bin\Debug\net8.0-windows\Gma.System.MouseKeyHook.dll
+C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\AwesomeAutoClicker.csproj.AssemblyReference.cache
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\MainWindow.g.cs
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\Views\AboutWindow.g.cs
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\Views\AdvancedView.g.cs
@@ -21,13 +25,9 @@ C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-wind
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\AwesomeAutoClicker.AssemblyInfo.cs
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\AwesomeAutoClicker.csproj.CoreCompileInputs.cache
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\AwesomeAutoClicker.sourcelink.json
+C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\AwesomeA.DBE5AF53.Up2Date
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\AwesomeAutoClicker.dll
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\refint\AwesomeAutoClicker.dll
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\AwesomeAutoClicker.pdb
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\AwesomeAutoClicker.genruntimeconfig.cache
 C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\ref\AwesomeAutoClicker.dll
-C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\bin\Debug\net8.0-windows\WindowsInput.dll
-C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\AwesomeAutoClicker.csproj.AssemblyReference.cache
-C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\obj\Debug\net8.0-windows\AwesomeA.DBE5AF53.Up2Date
-C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\bin\Debug\net8.0-windows\Gma.System.MouseKeyHook.dll
-C:\Users\Quinn DeCota\QuinnsAutoClicker\AwesomeAutoClicker\bin\Debug\net8.0-windows\InputSimulatorStandard.dll

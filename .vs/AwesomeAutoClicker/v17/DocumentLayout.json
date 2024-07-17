@@ -3,20 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|c:\\users\\quinn decota\\quinnsautoclicker\\awesomeautoclicker\\views\\homeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|solutionrelative:views\\homeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|c:\\users\\quinn decota\\quinnsautoclicker\\awesomeautoclicker\\views\\advancedview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|solutionrelative:views\\advancedview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|c:\\users\\quinn decota\\quinnsautoclicker\\awesomeautoclicker\\views\\homeview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|solutionrelative:views\\homeview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|c:\\users\\quinn decota\\quinnsautoclicker\\awesomeautoclicker\\views\\advancedview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|solutionrelative:views\\advancedview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|c:\\users\\quinn decota\\quinnsautoclicker\\awesomeautoclicker\\views\\homeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|solutionrelative:views\\homeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|c:\\users\\quinn decota\\quinnsautoclicker\\awesomeautoclicker\\views\\advancedview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|solutionrelative:views\\advancedview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|c:\\users\\quinn decota\\quinnsautoclicker\\awesomeautoclicker\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|c:\\users\\quinn decota\\quinnsautoclicker\\awesomeautoclicker\\viewmodels\\homevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|solutionrelative:viewmodels\\homevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|c:\\users\\quinn decota\\quinnsautoclicker\\awesomeautoclicker\\commands\\navigatecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|solutionrelative:commands\\navigatecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|c:\\users\\quinn decota\\quinnsautoclicker\\awesomeautoclicker\\viewmodels\\advancedvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BEFC5CA-556D-4468-BD91-0EA88FF3988F}|AwesomeAutoClicker.csproj|solutionrelative:viewmodels\\advancedvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,14 +47,73 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AdvancedView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Views\\AdvancedView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\AdvancedView.xaml.cs",
+              "ToolTip": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Views\\AdvancedView.xaml.cs",
+              "RelativeToolTip": "Views\\AdvancedView.xaml.cs",
+              "ViewState": "AQIAAHkAAAAAAAAAAAAswIcAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T03:23:18.142Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AdvancedView.xaml",
+              "DocumentMoniker": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Views\\AdvancedView.xaml",
+              "RelativeDocumentMoniker": "Views\\AdvancedView.xaml",
+              "ToolTip": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Views\\AdvancedView.xaml",
+              "RelativeToolTip": "Views\\AdvancedView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-07-16T02:20:06.139Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HomeVM.cs",
+              "DocumentMoniker": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\ViewModels\\HomeVM.cs",
+              "RelativeDocumentMoniker": "ViewModels\\HomeVM.cs",
+              "ToolTip": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\ViewModels\\HomeVM.cs",
+              "RelativeToolTip": "ViewModels\\HomeVM.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T02:01:43.939Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AdvancedVM.cs",
+              "DocumentMoniker": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\ViewModels\\AdvancedVM.cs",
+              "RelativeDocumentMoniker": "ViewModels\\AdvancedVM.cs",
+              "ToolTip": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\ViewModels\\AdvancedVM.cs",
+              "RelativeToolTip": "ViewModels\\AdvancedVM.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T02:01:37.169Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "HomeView.xaml",
               "DocumentMoniker": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Views\\HomeView.xaml",
               "RelativeDocumentMoniker": "Views\\HomeView.xaml",
               "ToolTip": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Views\\HomeView.xaml",
               "RelativeToolTip": "Views\\HomeView.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-07-14T17:46:10.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T01:53:27.984Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "NavigateCommand.cs",
+              "DocumentMoniker": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Commands\\NavigateCommand.cs",
+              "RelativeDocumentMoniker": "Commands\\NavigateCommand.cs",
+              "ToolTip": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Commands\\NavigateCommand.cs",
+              "RelativeToolTip": "Commands\\NavigateCommand.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAA4wCUAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T01:47:54.451Z"
             },
             {
               "$type": "Document",
@@ -48,41 +123,21 @@
               "RelativeDocumentMoniker": "Views\\HomeView.xaml.cs",
               "ToolTip": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Views\\HomeView.xaml.cs",
               "RelativeToolTip": "Views\\HomeView.xaml.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAA9wEoAAAAUAAAA",
+              "ViewState": "AQIAABAAAAAAAAAAAAAYwHYAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-14T17:46:12.47Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 144,
-          "SelectedChildIndex": 1,
-          "Children": [
+              "WhenOpened": "2024-07-14T17:46:12.47Z"
+            },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAA2wCkAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-14T17:53:04.387Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AdvancedView.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Views\\AdvancedView.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\AdvancedView.xaml.cs",
-              "ToolTip": "C:\\Users\\Quinn DeCota\\QuinnsAutoClicker\\AwesomeAutoClicker\\Views\\AdvancedView.xaml.cs",
-              "RelativeToolTip": "Views\\AdvancedView.xaml.cs",
-              "ViewState": "AQIAAGIAAAAAAAAAAAA0wHMAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-14T17:48:19.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T02:17:27.378Z"
             }
           ]
         }
