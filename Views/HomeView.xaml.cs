@@ -73,9 +73,10 @@ InitializeComponent();
         public bool stop { get; set; }
         private void Start()
         {
+            ((MainWindowVM)(this.DataContext)).canNavigate = false;
             RunningStats.Text = "Running :)";
             stop = false;
-            DataContext = new HomeVM(false);
+
             int timeInMilliseconds = GetTimeInMilliseconds();
             if (timeInMilliseconds <1)
             {

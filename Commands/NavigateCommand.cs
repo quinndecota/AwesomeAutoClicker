@@ -10,11 +10,11 @@ namespace AwesomeAutoClicker.Commands
 {
     public class NavigateCommand : ICommand
     {
-        private MainWindowVM viewModel;
+        private MainWindowVM ViewModel;
 
         public NavigateCommand(MainWindowVM viewModel)
         {
-            this.viewModel = viewModel;
+            ViewModel = viewModel;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -26,14 +26,18 @@ namespace AwesomeAutoClicker.Commands
 
         public void Execute(object parameter)
         {
+            if (ViewModel.canNavigate)
+            {
             if (parameter.ToString() == "Home")
             {
-                viewModel.SelectedViewModel = new HomeVM();
+                ViewModel.SelectedViewModel = new HomeVM(ViewModel);
             }
             else if (parameter.ToString() == "Advanced")
             {
-                viewModel.SelectedViewModel = new AdvancedVM();
+                ViewModel.SelectedViewModel = new AdvancedVM(ViewModel);
             }
+            }
+            
         }
     }
 }

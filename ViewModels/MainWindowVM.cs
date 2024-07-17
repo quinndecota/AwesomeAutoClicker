@@ -11,6 +11,7 @@ namespace AwesomeAutoClicker.ViewModels
 {
     public class MainWindowVM : ViewModelBase
     {
+        public bool canNavigate = true;
 
         private ViewModelBase _selectedViewModel;
         public ViewModelBase SelectedViewModel
@@ -28,7 +29,7 @@ namespace AwesomeAutoClicker.ViewModels
 
         public MainWindowVM()
         {
-            SelectedViewModel = new HomeVM(true);
+            SelectedViewModel = new HomeVM(this);
             NavigateCommand = new NavigateCommand(this);
             ShowAboutCommand = new ShowAboutCommand();
         }

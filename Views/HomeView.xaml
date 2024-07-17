@@ -9,8 +9,10 @@
              d:DesignHeight="350" d:DesignWidth="554"
              MaxHeight="350" MaxWidth="554"
              MinHeight="350" MinWidth="554">
-    
 
+    <UserControl.DataContext>
+        <vm:MainWindowVM />
+    </UserControl.DataContext>
     <Grid>
 
 
@@ -142,7 +144,7 @@
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Mouse Button"
                Margin="5, 5, 5, 5" VerticalAlignment="Center" TextAlignment="Center"/>
                     <ComboBox Grid.Row="0" Grid.Column="1" Margin="5, 5, 5, 5"
-              SelectedIndex="0"  HorizontalAlignment="Stretch" Name="ClickType">
+              SelectedIndex="0"  HorizontalAlignment="Stretch" Name="ClickType" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         <ComboBoxItem Content="Left" />
                         <ComboBoxItem Content="Middle" />
                         <ComboBoxItem Content="Right" />
