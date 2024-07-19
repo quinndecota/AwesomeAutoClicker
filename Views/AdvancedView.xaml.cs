@@ -40,12 +40,14 @@ namespace AwesomeAutoClicker.Views
         double screenWidth = SystemParameters.PrimaryScreenWidth;
         double screenHeight = SystemParameters.PrimaryScreenHeight;
 
+        public bool canNavigate { get; set; }
 
         public AdvancedView()
         {
             InitializeComponent();
             actions.ItemsSource = gridViewActions;
             Subscribe();
+            canNavigate = true;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -121,8 +123,26 @@ namespace AwesomeAutoClicker.Views
 
         private void Run_Click(object sender, RoutedEventArgs e)
         {
+            if (script.Count == 0)
+            { return; }
+            int DefaultMillisecondsWait;
+            try
+            {
+                DefaultMillisecondsWait = Int32.Parse(DefaultWait.Text);
+                if (DefaultMillisecondsWait < 1)
+                {
+                    throw new Exception();
+                }
+            }
+            catch
+            {
+                DefaultWait.Text = "1";
+                DefaultMillisecondsWait = 1;
+            }
+
             stop = false;
             int i = -1;
+            canNavigate = false;
             if (loopScriptCheckBox.IsChecked == true)
             {
                 while (true)
@@ -130,32 +150,35 @@ namespace AwesomeAutoClicker.Views
                     i = -1;
                     foreach (Models.Action currentAction in script)
                     {
-                        
+
                         if (stop)
                         {
                             return;
-                        }    
-                        i++;                    
+                        }
+                        i++;
                         actions.SelectedIndex = i;
 
                         DoActionCommand(currentAction);
+                        Wait(DefaultMillisecondsWait);
                     }
                 }
             }
             foreach (Models.Action currentAction in script)
             {
-                
+
                 {
                     if (stop)
                     {
                         return;
                     }
                     i++;
-                actions.SelectedIndex = i;
+                    actions.SelectedIndex = i;
                     DoActionCommand(currentAction);
+                    Wait(DefaultMillisecondsWait);
                 }
             }
         }
+
         #region DoActionCommand
         private void DoActionCommand(Models.Action action)
         {
@@ -186,10 +209,73 @@ namespace AwesomeAutoClicker.Views
 
         private void SendActionCommand(string? message)
         {
-            input.Keyboard.TextEntry(message);
+            int index;
+
+            while ((index = message.IndexOf("[*")) != -1)
+            {
+                // Print everything before the control sequence
+                input.Keyboard.TextEntry(message.Substring(0, index));
+                message = message.Substring(index);
+
+                if (message.StartsWith("[*enter]"))
+                {
+                    input.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                    message = message.Substring("[*enter]".Length);
+                }
+                else if (message.StartsWith("[*escape]"))
+                {
+                    input.Keyboard.KeyPress(VirtualKeyCode.ESCAPE);
+                    message = message.Substring("[*escape]".Length);
+                }
+                else if (message.StartsWith("[*tab]"))
+                {
+                    input.Keyboard.KeyPress(VirtualKeyCode.TAB);
+                    message = message.Substring("[*tab]".Length);
+                }
+                else if (message.StartsWith("[*up]"))
+                {
+                    input.Keyboard.KeyPress(VirtualKeyCode.UP);
+                    message = message.Substring("[*updown]".Length);
+                }
+                else if (message.StartsWith("[*down]"))
+                {
+                    input.Keyboard.KeyPress(VirtualKeyCode.DOWN);
+                    message = message.Substring("[*down]".Length);
+                }
+                else if (message.StartsWith("[*left]"))
+                {
+                    input.Keyboard.KeyPress(VirtualKeyCode.LEFT);
+                    message = message.Substring("[*left]".Length);
+                }
+                else if (message.StartsWith("[*right]"))
+                {
+                    input.Keyboard.KeyPress(VirtualKeyCode.RIGHT);
+                    message = message.Substring("[*right]".Length);
+                }
+                else if (message.StartsWith("[*delete]"))
+                {
+                    input.Keyboard.KeyPress(VirtualKeyCode.DELETE);
+                    message = message.Substring("[*delete]".Length);
+                }
+                else
+                {
+                    // In case an unknown control sequence is encountered
+                    input.Keyboard.TextEntry(message[0]);
+                    message = message.Substring(1);
+                }
+            }
+
+            // Print the remaining part of the string
+            if(message.Length > 0)
+            {
+                input.Keyboard.TextEntry(message);
+            }
         }
 
-        private void IntervalActionCommand(int m) => Wait(m);
+        private void IntervalActionCommand(int m) 
+        {
+            Wait(m); 
+        }
 
         private void ClickActionCommand(string clickType, int xpos, int ypos)
         {
@@ -348,6 +434,7 @@ namespace AwesomeAutoClicker.Views
             {
                 actions.SelectedIndex = -1;
                 stop = true;
+                canNavigate = true;
             }
         }
 

@@ -14,7 +14,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                 <TextBlock FontSize="20" Foreground="White" Margin="0 40 0 0" TextAlignment="Center">By: Quinn</TextBlock>
-                <TextBlock FontSize="10" Foreground="White" Margin="0 20 0 0">www.mywebsite.com</TextBlock>
+                <TextBlock Margin="0 20 0 0"><Hyperlink NavigateUri="https://github.com/qtdbros3/AwesomeAutoClicker" FontSize="10" Foreground="White" Click="Hyperlink_Click" >github.com/qtdbros3</Hyperlink></TextBlock>
             </StackPanel>
         </Grid>
     </Border>

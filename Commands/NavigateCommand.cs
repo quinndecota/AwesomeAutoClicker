@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AwesomeAutoClicker.ViewModels;
+using AwesomeAutoClicker.Views;
 
 namespace AwesomeAutoClicker.Commands
 {
@@ -26,8 +27,7 @@ namespace AwesomeAutoClicker.Commands
 
         public void Execute(object parameter)
         {
-            if (ViewModel.canNavigate)
-            {
+            
             if (parameter.ToString() == "Home")
             {
                 ViewModel.SelectedViewModel = new HomeVM(ViewModel);
@@ -36,7 +36,7 @@ namespace AwesomeAutoClicker.Commands
             {
                 ViewModel.SelectedViewModel = new AdvancedVM(ViewModel);
             }
-            }
+            
             
         }
     }

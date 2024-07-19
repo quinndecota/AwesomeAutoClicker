@@ -73,7 +73,7 @@ InitializeComponent();
         public bool stop { get; set; }
         private void Start()
         {
-            ((MainWindowVM)(this.DataContext)).canNavigate = false;
+
             RunningStats.Text = "Running :)";
             stop = false;
 
@@ -107,9 +107,11 @@ InitializeComponent();
                         DoHomeViewMouseClick();
                         Wait(timeInMilliseconds);
                     }
+                    RunningStats.Text = "Not Running";
                 }
                 catch
                 {
+                    RunningStats.Text = "Not Running";
                     return;
                 }
             }
@@ -182,6 +184,20 @@ InitializeComponent();
 
         private void DoHomeViewMouseClick()
         {
+            if ((bool)SelectedLocationRadioButton.IsChecked)
+            {
+                try
+                {
+                    int xpos = Int32.Parse(TextBoxPickedXValue.Text);
+                    int ypos = Int32.Parse(TextBoxPickedYValue.Text);
+                    input.Mouse.MoveMouseTo((xpos * 65615 / (screenWidth)), (ypos * 65615 / (screenHeight)));
+                }
+                catch
+                {
+                    SelectedLocationRadioButton.IsChecked = false;
+                    RadioButtonSelectedLocationMode_CurrentLocation.IsChecked = true;
+                }
+            }
             if (ClickType.Text == "Left")
             {
                 input.Mouse.LeftButtonClick();
@@ -194,19 +210,7 @@ InitializeComponent();
             {
                 input.Mouse.RightButtonClick();
             }
-            if ((bool)SelectedLocationRadioButton.IsChecked)
-            {
-                try
-                {
-                    int xpos = Int32.Parse(TextBoxPickedXValue.Text);
-                    int ypos = Int32.Parse(TextBoxPickedYValue.Text);
-                    input.Mouse.MoveMouseTo((xpos * 65615 / (screenWidth)), (ypos * 65615 / (screenHeight)));
-                } catch
-                {
-                    SelectedLocationRadioButton.IsChecked = false;
-                    RadioButtonSelectedLocationMode_CurrentLocation.IsChecked = true;
-                }
-            }
+            
         }
 
         public static void Wait(int milliseconds)

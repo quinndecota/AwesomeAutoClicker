@@ -105,13 +105,22 @@
                         <Label Content="Milliseconds" />
                         <TextBox Name="Milliseconds" />
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" Width="150" Name="MessageOption" Visibility="Collapsed">
-                        <Label Content="Message" />
-                        <TextBox Name="Message" />
+                    <StackPanel Orientation="Horizontal" Name="MessageOption" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical" Width="150"   Margin="0 0 10 0">
+                            <Label Content="Message" />
+                            <TextBox Name="Message" />
+
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Width="200"  >
+
+                            <TextBlock Foreground="White" Width="200" TextWrapping="Wrap" FontSize="11" TextAlignment="Center">You can inject special clicks with the syntax [*...]: List of special clicks:</TextBlock>
+
+                            <TextBlock Foreground="White" Width="200" TextWrapping="Wrap" FontSize="9" TextAlignment="Center" VerticalAlignment="Bottom">[*up], [*down], [*left], [*right], [*enter], [*tab], [*escape], [*delete]</TextBlock>
+                        </StackPanel>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Width="200" Name="CmdCharOption" Visibility="Collapsed">
                         <Label Content="Command Character (Ctrl+?)" />
-                        <TextBox Name="CmdChar" />
+                        <TextBox Name="CmdChar"  Width="100" HorizontalAlignment="Left" Margin="10 0 0 0"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -133,6 +142,13 @@
                 </ListView>
 
                 <StackPanel Grid.Row="2" Grid.Column="3" Margin="0 0 0 0" VerticalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Width="100"  Margin="0 0 0 10">
+                        <TextBlock Text="Default wait " Foreground="White" FontSize="10" Width="100" TextAlignment="Center"/>
+                        <TextBlock Text="between events" Foreground="White" FontSize="10" Width="100" TextAlignment="Center"/>
+                        <TextBlock Text="(milliseconds)" Foreground="White" FontSize="10" Width="100" TextAlignment="Center"/>
+                        <TextBox Name="DefaultWait" Text="1"/>
+                    </StackPanel>
+
                     <TextBlock HorizontalAlignment="Center" Foreground="White">Loop forever?</TextBlock>
                     <CheckBox Name="loopScriptCheckBox" HorizontalAlignment="Center" Margin="0 5 0 20"/>
                     <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Run" Margin="5" Padding="10" Name="Run" Click="Run_Click">
@@ -142,7 +158,7 @@
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <TextBlock HorizontalAlignment="Center" Foreground="White" Margin="0 10 0 0">Stop with "n" key</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Foreground="White" Margin="0 10 0 10">Stop with "n" key</TextBlock>
 
                 </StackPanel>
 

@@ -13,7 +13,7 @@ namespace AwesomeAutoClicker.ViewModels
     {
         public MainWindowVM ViewModel { get; set; }
 
-         
+        public bool isRunning { get; set; }
         public AdvancedVM(MainWindowVM viewModel)
         {
             ViewModel = viewModel;
