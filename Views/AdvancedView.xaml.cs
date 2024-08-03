@@ -32,93 +32,110 @@ namespace AwesomeAutoClicker.Views
     /// </summary>
     public partial class AdvancedView : System.Windows.Controls.UserControl
     {
+        #region Initializations
         List<Models.Action> script = new List<Models.Action>();
         InputSimulator input = new InputSimulator();
         ObservableCollection<string> gridViewActions = new ObservableCollection<string>();
         private IKeyboardMouseEvents? m_GlobalHook;
-        private bool stop = false;
+        private bool isStopping = true;
         double screenWidth = SystemParameters.PrimaryScreenWidth;
         double screenHeight = SystemParameters.PrimaryScreenHeight;
-
-        public bool canNavigate { get; set; }
+        #endregion
 
         public AdvancedView()
         {
             InitializeComponent();
             actions.ItemsSource = gridViewActions;
             Subscribe();
-            canNavigate = true;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (!(ValidateTextBoxes()))
+            if (isStopping)
             {
-                return;
-            }
+                if (!(ValidateTextBoxes()))
+                {
+                    return;
+                }
 
-            var index = actions.SelectedIndex;
+                var index = actions.SelectedIndex;
 
-            if (index == -1)
-            {
-                index = script.Count;
-            }
+                if (index == -1)
+                {
+                    index = script.Count;
+                }
 
-            if (TypeComboBox.Text == "Click")
-            {
-                if (XPos.Text == null || XPos.Text.Length == 0 || YPos.Text == null || YPos.Text.Length == 0 || ClickType.Text == null || ClickType.Text.Length == 0)
-                { return; }
-                Models.Action currentAction = new Models.Action(TypeComboBox.Text, ClickType.Text, int.Parse(XPos.Text), int.Parse(YPos.Text), null, null, null);
-                gridViewActions.Insert(index, currentAction.ClickType + " click at (" + currentAction.Xpos + "," + currentAction.Ypos + ")");
-                script.Insert(index, currentAction);
-            }
-            else if (TypeComboBox.Text == "Command")
-            {
-                if (CmdChar.Text == null || CmdChar.Text.Length == 0)
-                { return; }
-                Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, null, null, CmdChar.Text);
-                gridViewActions.Insert(index, "Ctrl + " + currentAction.CmdChar);
-                script.Insert(index, currentAction);
-            }
-            else if (TypeComboBox.Text == "Interval")
-            {
-                if (Milliseconds.Text == null || Milliseconds.Text.Length == 0)
-                { return; }
-                Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, int.Parse(Milliseconds.Text), null, null);
-                gridViewActions.Insert(index, "Wait: " + currentAction.Milliseconds + " milliseconds");
-                script.Insert(index, currentAction);
-            }
-            else if (TypeComboBox.Text == "Send")
-            {
-                if (Message.Text == null || Message.Text.Length == 0)
-                { return; }
-                Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, null, Message.Text, null);
-                gridViewActions.Insert(index, "Send Message: " + currentAction.Message);
-                script.Insert(index, currentAction);
+                if (TypeComboBox.Text == "Click")
+                {
+                    if (CurrentLocationOption.IsChecked == false || CurrentLocationOption.IsChecked == null)
+                    {
+                        Models.Action clickAction = new Models.Action(TypeComboBox.Text, ClickType.Text, -1,-1, null, null, null);
+                        gridViewActions.Insert(index, clickAction.ClickType + " click at current location");
+                        script.Insert(index, clickAction);
+                        return;
+                    }
+                    if (XPos.Text == null || XPos.Text.Length == 0 || YPos.Text == null || YPos.Text.Length == 0 || ClickType.Text == null || ClickType.Text.Length == 0)
+                    { return; }
+                    Models.Action currentAction = new Models.Action(TypeComboBox.Text, ClickType.Text, int.Parse(XPos.Text), int.Parse(YPos.Text), null, null, null);
+                    gridViewActions.Insert(index, currentAction.ClickType + " click at (" + currentAction.Xpos + "," + currentAction.Ypos + ")");
+                    script.Insert(index, currentAction);
+                }
+                else if (TypeComboBox.Text == "Command")
+                {
+                    if (CmdChar.Text == null || CmdChar.Text.Length == 0)
+                    { return; }
+                    Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, null, null, CmdChar.Text);
+                    gridViewActions.Insert(index, "Ctrl + " + currentAction.CmdChar);
+                    script.Insert(index, currentAction);
+                }
+                else if (TypeComboBox.Text == "Interval")
+                {
+                    if (Milliseconds.Text == null || Milliseconds.Text.Length == 0)
+                    { return; }
+                    Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, int.Parse(Milliseconds.Text), null, null);
+                    gridViewActions.Insert(index, "Wait: " + currentAction.Milliseconds + " milliseconds");
+                    script.Insert(index, currentAction);
+                }
+                else if (TypeComboBox.Text == "Send")
+                {
+                    if (Message.Text == null || Message.Text.Length == 0)
+                    { return; }
+                    Models.Action currentAction = new Models.Action(TypeComboBox.Text, null, null, null, null, Message.Text, null);
+                    gridViewActions.Insert(index, "Send Message: " + currentAction.Message);
+                    script.Insert(index, currentAction);
+                }
+
             }
         }
 
         private void Del_Click(object sender, RoutedEventArgs e)
         {
-            var index = actions.SelectedIndex;
-            if (gridViewActions.Count < 1)
-            { return; }
-            if (index == -1)
+            if (isStopping)
             {
-                gridViewActions.RemoveAt(0);
-                script.RemoveAt(0);
-            }
-            else
-            {
-                gridViewActions.RemoveAt(index);
-                script.RemoveAt(index);
+                var index = actions.SelectedIndex;
+                if (gridViewActions.Count < 1)
+                { return; }
+                if (index == -1)
+                {
+                    gridViewActions.RemoveAt(gridViewActions.Count-1);
+                    script.RemoveAt(script.Count - 1);
+                }
+                else
+                {
+                    gridViewActions.RemoveAt(index);
+                    script.RemoveAt(index);
+                }
             }
         }
 
         private void Clr_Click(object sender, RoutedEventArgs e)
         {
-            gridViewActions.Clear();
-            script.Clear();
+            if (isStopping)
+            { 
+                gridViewActions.Clear();
+                script.Clear();
+            }
+
         }
 
         private void Run_Click(object sender, RoutedEventArgs e)
@@ -140,9 +157,8 @@ namespace AwesomeAutoClicker.Views
                 DefaultMillisecondsWait = 1;
             }
 
-            stop = false;
+            isStopping = false;
             int i = -1;
-            canNavigate = false;
             if (loopScriptCheckBox.IsChecked == true)
             {
                 while (true)
@@ -151,7 +167,7 @@ namespace AwesomeAutoClicker.Views
                     foreach (Models.Action currentAction in script)
                     {
 
-                        if (stop)
+                        if (isStopping)
                         {
                             return;
                         }
@@ -167,7 +183,7 @@ namespace AwesomeAutoClicker.Views
             {
 
                 {
-                    if (stop)
+                    if (isStopping)
                     {
                         return;
                     }
@@ -177,6 +193,7 @@ namespace AwesomeAutoClicker.Views
                     Wait(DefaultMillisecondsWait);
                 }
             }
+            isStopping = true;
         }
 
         #region DoActionCommand
@@ -205,70 +222,70 @@ namespace AwesomeAutoClicker.Views
             input.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, GetVirtualKeyCode(cmdChar));
         }
 
-
-
-        private void SendActionCommand(string? message)
+        private void SendActionCommand(string? m)
         {
             int index;
-
-            while ((index = message.IndexOf("[*")) != -1)
+            string text = m;
+            while ((index = text.IndexOf("[*")) != -1)
             {
                 // Print everything before the control sequence
-                input.Keyboard.TextEntry(message.Substring(0, index));
-                message = message.Substring(index);
-
-                if (message.StartsWith("[*enter]"))
+                if (text.IndexOf("[*") > 0)
+                {
+                input.Keyboard.TextEntry(text.Substring(0, index));
+                text = text.Substring(index);
+                }
+                if (text.StartsWith("[*enter]"))
                 {
                     input.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-                    message = message.Substring("[*enter]".Length);
+                    text = text.Substring("[*enter]".Length);
                 }
-                else if (message.StartsWith("[*escape]"))
+                else if (text.StartsWith("[*escape]"))
                 {
                     input.Keyboard.KeyPress(VirtualKeyCode.ESCAPE);
-                    message = message.Substring("[*escape]".Length);
+                    text = text.Substring("[*escape]".Length);
                 }
-                else if (message.StartsWith("[*tab]"))
+                else if (text.StartsWith("[*tab]"))
                 {
                     input.Keyboard.KeyPress(VirtualKeyCode.TAB);
-                    message = message.Substring("[*tab]".Length);
+                    text = text.Substring("[*tab]".Length);
                 }
-                else if (message.StartsWith("[*up]"))
+                else if (text.StartsWith("[*up]"))
                 {
                     input.Keyboard.KeyPress(VirtualKeyCode.UP);
-                    message = message.Substring("[*updown]".Length);
+                    text = text.Substring("[*updown]".Length);
                 }
-                else if (message.StartsWith("[*down]"))
+                else if (text.StartsWith("[*down]"))
                 {
                     input.Keyboard.KeyPress(VirtualKeyCode.DOWN);
-                    message = message.Substring("[*down]".Length);
+                    text = text.Substring("[*down]".Length);
                 }
-                else if (message.StartsWith("[*left]"))
+                else if (text.StartsWith("[*left]"))
                 {
                     input.Keyboard.KeyPress(VirtualKeyCode.LEFT);
-                    message = message.Substring("[*left]".Length);
+                    text = text.Substring("[*left]".Length);
                 }
-                else if (message.StartsWith("[*right]"))
+                else if (text.StartsWith("[*right]"))
                 {
                     input.Keyboard.KeyPress(VirtualKeyCode.RIGHT);
-                    message = message.Substring("[*right]".Length);
+                    text = text.Substring("[*right]".Length);
                 }
-                else if (message.StartsWith("[*delete]"))
+                else if (text.StartsWith("[*delete]"))
                 {
                     input.Keyboard.KeyPress(VirtualKeyCode.DELETE);
-                    message = message.Substring("[*delete]".Length);
+                    text = text.Substring("[*delete]".Length);
                 }
                 else
                 {
                     // In case an unknown control sequence is encountered
-                    input.Keyboard.TextEntry(message[0]);
-                    message = message.Substring(1);
+                    input.Keyboard.TextEntry(text[0]);
+                    text = text.Substring(1);
                 }
             }
 
             // Print the remaining part of the string
-            if(message.Length > 0)
+            if(text.Length > 0)
             {
-                input.Keyboard.TextEntry(message);
+                input.Keyboard.TextEntry(text);
             }
         }
 
@@ -279,7 +296,11 @@ namespace AwesomeAutoClicker.Views
 
         private void ClickActionCommand(string clickType, int xpos, int ypos)
         {
-            input.Mouse.MoveMouseTo((xpos * 65615 / (screenWidth)), (ypos * 65615 / (screenHeight)));
+            if (xpos >-1 && ypos > -1)
+            {
+                input.Mouse.MoveMouseTo((xpos * 65615 / (screenWidth)), (ypos * 65615 / (screenHeight)));
+            }
+            
 
             if (clickType == "Left")
             {
@@ -433,8 +454,7 @@ namespace AwesomeAutoClicker.Views
             if (e.KeyChar == 'n' || e.KeyChar == 'N')
             {
                 actions.SelectedIndex = -1;
-                stop = true;
-                canNavigate = true;
+                isStopping = true;
             }
         }
 
@@ -454,8 +474,6 @@ namespace AwesomeAutoClicker.Views
             if (TypeComboBox.Text == "Click")
             {
                 ClickTypeOption.Visibility = Visibility.Visible;
-                XPosOption.Visibility = Visibility.Visible;
-                YPosOption.Visibility = Visibility.Visible;
                 MillisecondsOption.Visibility = Visibility.Collapsed;
                 MessageOption.Visibility = Visibility.Collapsed;
                 CmdCharOption.Visibility = Visibility.Collapsed;
@@ -603,12 +621,16 @@ namespace AwesomeAutoClicker.Views
         {
             if (TypeComboBox.Text == "Click")
             {
+                if (CurrentLocationOption.IsChecked == false || CurrentLocationOption.IsChecked == null)
+                {
+                    return true;
+                }
                 try
                 {
                     int x = int.Parse(XPos.Text);
                     int y = int.Parse(YPos.Text);
 
-                    if (x > screenWidth || y > screenHeight)
+                    if (x > screenWidth || y > screenHeight || x < 0 || y < 0)
                     {
                         throw new Exception();
                     }
@@ -641,6 +663,21 @@ namespace AwesomeAutoClicker.Views
                 }
             }
             return true;
+        }
+
+        private void CurrentLocationOption_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentLocationOption.IsChecked == true)
+            {
+                XPosOption.Visibility = Visibility.Visible;
+                YPosOption.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                XPosOption.Visibility = Visibility.Collapsed;
+                YPosOption.Visibility = Visibility.Collapsed;
+
+            }
         }
     }
 }

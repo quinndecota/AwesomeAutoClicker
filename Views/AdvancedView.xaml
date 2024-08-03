@@ -85,15 +85,21 @@
                             <Setter Property="Foreground" Value="White" />
                         </Style>
                     </StackPanel.Resources>
-                    <StackPanel Orientation="Vertical" Width="100" Name="ClickTypeOption" Visibility="Collapsed" Margin="0 0 30 0">
+                    <StackPanel Orientation="Horizontal" Width="200" Name="ClickTypeOption" Visibility="Hidden" Margin="0 0 30 0">
+                    <StackPanel Orientation="Vertical" Width="100"   Margin="0 0 10 0">
                         <Label Content="Click Type" />
                         <ComboBox Name="ClickType" >
                             <ComboBoxItem Content="Left" />
                             <ComboBoxItem Content="Right" />
                             <ComboBoxItem Content="Hover" />
                         </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Width="100" Margin="0 0 10 0">
+                            <Label Content="Pick Location" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                            <CheckBox Name="CurrentLocationOption" Margin="40 0 0 0" Click="CurrentLocationOption_Click"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" Width="100" Name="XPosOption" Visibility="Collapsed" Margin="0 0 30 0">
+                    <StackPanel Orientation="Vertical" Width="100" Name="XPosOption" Visibility="Collapsed" Margin="10 0 20 0">
                         <Label Content="X Position" />
                         <TextBox Name="XPos" />
                     </StackPanel>
