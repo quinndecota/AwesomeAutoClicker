@@ -26,6 +26,8 @@ namespace AwesomeAutoClicker.Views
         public AboutWindow()
         {
             InitializeComponent();
+            Icon = BitmapFrame.Create(new Uri("pack://application:,,,/Resources/qicon.png"));
+
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)

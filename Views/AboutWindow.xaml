@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AwesomeAutoClicker.Views"
         mc:Ignorable="d"
-        Title="AboutWindow" Height="150" Width="200"
+        Title="" Height="150" Width="200"
                      MaxHeight="150" MaxWidth="200"
              MinHeight="150" MinWidth="200">
     <Border Background="#272535" CornerRadius="10">

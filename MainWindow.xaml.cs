@@ -27,7 +27,8 @@ namespace AwesomeAutoClicker
 
             DataContext = new MainWindowVM();
             Subscribe();
-            
+            Icon = BitmapFrame.Create(new Uri("pack://application:,,,/Resources/qicon.png"));
+
         }
         #region Mouse Coordinates
         public void Subscribe()

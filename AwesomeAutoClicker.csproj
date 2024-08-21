@@ -9,9 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\qicon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="InputSimulator" Version="1.0.4" />
     <PackageReference Include="InputSimulatorStandard" Version="1.0.0" />
     <PackageReference Include="MouseKeyHook" Version="5.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\qicon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

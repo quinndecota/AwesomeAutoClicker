@@ -7,10 +7,10 @@
         xmlns:views="clr-namespace:AwesomeAutoClicker.Views"
         xmlns:viewmodels="clr-namespace:AwesomeAutoClicker.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowVM}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="375" Width="571"
+  
+        Title="Quinn's MacroMaker and AutoClicker" Height="375" Width="571"
                      MaxHeight="375" MaxWidth="571"
              MinHeight="375" MinWidth="571">
-
 
     <Border Background="#272535" CornerRadius="10">
 

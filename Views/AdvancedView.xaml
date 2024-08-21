@@ -119,7 +119,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Width="200"  >
 
-                            <TextBlock Foreground="White" Width="200" TextWrapping="Wrap" FontSize="11" TextAlignment="Center">You can inject special clicks with the syntax [*...]: List of special clicks:</TextBlock>
+                            <TextBlock Foreground="White" Width="200" TextWrapping="Wrap" FontSize="11" TextAlignment="Center">You can inject special clicks with one of the following:</TextBlock>
 
                             <TextBlock Foreground="White" Width="200" TextWrapping="Wrap" FontSize="9" TextAlignment="Center" VerticalAlignment="Bottom">[*up], [*down], [*left], [*right], [*enter], [*tab], [*escape], [*delete]</TextBlock>
                         </StackPanel>
